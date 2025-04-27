@@ -1,0 +1,173 @@
+/* Import Tailwind base styles, components, and utilities */
+/* This assumes you might want to add custom CSS alongside Tailwind */
+/* If only using Tailwind classes, this file might be minimal */
+/* @tailwind base; */
+/* @tailwind components; */
+/* @tailwind utilities; */
+
+/* --- Custom Styles --- */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8fafc; /* Tailwind gray-50 */
+}
+
+/* Section visibility transitions */
+.section {
+    transition: opacity 0.3s ease-in-out, max-height 0.5s ease-in-out;
+    overflow: hidden;
+}
+.section.hidden {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-width: 0;
+    visibility: hidden; /* Important for preventing interaction */
+}
+.section:not(.hidden) {
+    max-height: 500vh; /* Adjust if needed, large enough for content */
+    visibility: visible;
+}
+
+/* Dynamic field styling */
+.dynamic-field-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* 8px */
+    margin-bottom: 0.5rem; /* 8px */
+}
+.dynamic-field-group input[type="text"],
+.dynamic-field-group input[type="number"] { /* Target specific inputs if needed */
+    flex-grow: 1;
+}
+.remove-button { /* Style for remove buttons */
+    @apply text-red-500 hover:text-red-700 font-bold text-xl px-2 focus:outline-none transition-colors duration-150;
+}
+.step-number { /* Style for step numbers */
+     @apply font-semibold mr-2 text-gray-500 w-6 text-right flex-shrink-0;
+}
+
+/* Modal styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.modal-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+.modal-content {
+    background-color: white;
+    padding: 1.5rem 2rem;
+    border-radius: 0.5rem; /* 8px */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+    max-width: 90%;
+    width: 500px;
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+.modal-overlay.visible .modal-content {
+     transform: scale(1);
+}
+
+/* Utility for line clamping text */
+.line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+/* --- Component-like styles using Tailwind classes (apply these in HTML) --- */
+.input-field {
+    @apply w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 transition duration-150;
+}
+
+.form-section-box {
+     @apply mb-4 p-4 border border-gray-200 rounded-md bg-gray-50;
+}
+
+.button {
+    @apply font-semibold py-2 px-4 rounded-lg shadow transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-opacity-75;
+}
+.button:active {
+    transform: scale(0.98);
+}
+
+.button-primary {
+    @apply bg-emerald-500 hover:bg-emerald-600 text-white focus:ring-emerald-400;
+}
+.button-secondary {
+     @apply bg-gray-300 hover:bg-gray-400 text-gray-800 focus:ring-gray-400;
+}
+.button-danger {
+     @apply bg-red-500 hover:bg-red-600 text-white focus:ring-red-400;
+}
+.button-warning {
+     @apply bg-yellow-500 hover:bg-yellow-600 text-white focus:ring-yellow-400;
+}
+.button-tertiary { /* For less prominent actions like 'Back' */
+     @apply bg-gray-200 hover:bg-gray-300 text-gray-700 focus:ring-gray-300 text-sm px-3 py-1;
+}
+.button-add-field {
+     @apply text-sm bg-blue-100 hover:bg-blue-200 text-blue-700 font-semibold py-1 px-3 rounded-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-300;
+}
+
+/* Recipe Card Styling */
+.recipe-card {
+     @apply bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow duration-200 cursor-pointer flex flex-col;
+}
+.recipe-card img {
+     @apply w-full h-40 object-cover;
+}
+.recipe-card-content {
+     @apply p-4 flex flex-col flex-grow;
+}
+.recipe-card-title {
+    @apply font-semibold text-lg mb-1 text-gray-800;
+}
+.recipe-card-description {
+    @apply text-gray-600 text-sm mb-3 line-clamp-2 flex-grow;
+}
+.recipe-card-details {
+     @apply text-xs text-gray-500 mt-auto pt-2 border-t border-gray-100;
+}
+
+/* Recipe Detail View Styling */
+.detail-stat-box {
+    @apply bg-emerald-50 p-3 rounded-lg border border-emerald-100;
+}
+.detail-stat-label {
+    @apply block text-sm text-emerald-700 font-medium;
+}
+.detail-stat-value {
+    @apply text-lg font-semibold text-emerald-900;
+}
+.detail-section-title {
+    @apply text-xl font-semibold mb-3 text-gray-700 border-b pb-2;
+}
+.detail-list {
+     @apply list-none space-y-2 text-gray-700;
+}
+.detail-list-item {
+     @apply flex items-start;
+}
+.detail-list-icon { /* For ingredient checkmark */
+     @apply w-4 h-4 mr-2 mt-1 text-emerald-500 flex-shrink-0;
+}
+.detail-step-number { /* For step number */
+     @apply flex-shrink-0 bg-emerald-500 text-white rounded-full w-6 h-6 text-sm font-bold flex items-center justify-center mr-3;
+}
